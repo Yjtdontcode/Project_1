@@ -9,4 +9,4 @@ Using GitHub is a learning process, I can improve my code capability and progres
 I'm so happy that I wrote the gobang alone. It has many flaws, but it could make me happy all tonight!
 
 2023.4月3号：  
-我真tm开心啊，今晚自己写出了个五子棋游戏！
+我真tm开心啊，今晚自己写出了个五子棋游戏，虽然非常简陋，但是足够我开心了。
