@@ -13,9 +13,9 @@ double thick = 4;
 
 int main() 
 {
-	init();//��ʼ������
-	title();//�ı���
-	mouseconduct();//��ʼ����
+	init();//初始化画板
+	title();//改标题
+	mouseconduct();//开始画画
 	closegraph();
 	return 0;
 }
@@ -38,13 +38,13 @@ void mouseconduct() {
 			switch (msg.message) {
 			case WM_LBUTTONDOWN:
 				draw();
-				cout << "ֹͣ�滭" << endl;
+				cout << "停止绘画" << endl;
 				break;
 			case WM_RBUTTONDOWN:
-				cout << "a:��ɫ	 s:��ɫ	 d:��ɫ   f:��Ƥ��\n";
+				cout << "a:粉色	 s:红色	 d:黑色   f:橡皮擦\n";
 				show();
 				changecolor();
-				cout << "��ɫ���\n";
+				cout << "换色完成\n";
 				break;
 			case WM_MBUTTONDOWN:
 				cleardevice();
@@ -55,15 +55,39 @@ void mouseconduct() {
 		}
 	}
 }
+/*
+第一次学的时候只学了WM_LBUTTONDOWN这个鼠标消息，所以只能实现按一下左键开始绘画，然后按右键停止绘画，很麻烦
+第二天学会了lbutton，就可以一直按着左键绘画，代码参考如下
+
+initgraph(640, 480,SHOWCONSOLE);
+	setfillcolor(WHITE);
+	ExMessage msg;
+	while (1) {
+		if (peekmessage(&msg, EM_MOUSE)) {
+			if (msg.lbutton) {	//判断左键是否按下
+				fillcircle(msg.x, msg.y, 4);
+			}
+			else if (msg.rbutton) {	//判断右键是否按下
+				cleardevice();
+			}
+			else
+				continue;
+		}
+	}
+	
+*/
+
+
+
 
 void title() {
 	HWND h = GetHWnd();
-	SetWindowText(h, "С������");
+	SetWindowText(h, "小猪佩奇");
 }
 
 void draw() {
 	ExMessage msg;
-	cout << "��ʼ�滭" << endl;
+	cout << "开始绘画" << endl;
 	while (1) {
 		if(peekmessage(&msg,EM_MOUSE))
 			switch (msg.message) {
@@ -83,7 +107,7 @@ void changecolor() {
 	rectangle(680, 1, 720, 40);
 	rectangle(720, 1, 760, 40);
 	rectangle(760, 1, 799, 40);
-	cout << "ѡ����ɫ" << endl;
+	cout << "选择颜色" << endl;
 	char ch = _getch();
 	switch (ch) {
 	case 'a':
@@ -112,13 +136,13 @@ void changecolor() {
 		setfillcolor(BLACK);
 		setlinecolor(BLACK);
 		break;
-	case 'f'://��Ƥ��
+	case 'f'://橡皮擦
 		thick = 12;
 		setfillcolor(WHITE);
 		setlinecolor(WHITE);
 		break;
 	default:
-		cout << "�������" << endl;
+		cout << "输入错误" << endl;
 		changecolor();
 		break;
 	}
